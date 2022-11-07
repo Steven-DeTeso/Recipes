@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>New Recipes</title>
+</head>
+<body>
+    <div class="row">
+        <h1>Add a New Recipe!</h1>
+        <a href="">back to recipes</a>
+        <a href="">logout</a>
+    </div>
+    <div class="row">
+        <form action="/recipe/create" method="POST">
+            <label for="name" name="name">Name</label>
+            <input type="text" for="name" name="name">
+            <label for="description">Description</label>
+            <textarea name="description" cols="30" rows="10"></textarea>
+            <label for="instruction">instructions</label>
+            <textarea name="instruction" cols="30" rows="10"></textarea>
+            <p>Date Cooked/Made:</p>
+            <input type="date" name="created_at">
+            <label for="positive">Yes</label>
+            <input type="radio" name="minute" id="positive" value="1">
+            <label for="negatvie">No</label>
+            <input type="radio" name="minute" id="negatvie" value="0">
+            <input type="submit" value="Submit">
+            <input type="hidden" name="user_id" value="{{ session['user_id']['id'] }}">
+        </form>
+    </div>
+</body>
+</html>

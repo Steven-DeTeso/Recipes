@@ -35,7 +35,7 @@ class User:
             is_valid_email = False
         if is_valid_email:
             query = "SELECT * FROM users WHERE email = %(email)s;"
-            result = connectToMySQL('recipe_schema').query_db(query, form_data)
+            result = connectToMySQL('recipes').query_db(query, form_data)
             if len(result) >= 1:
                 flash("Email is already registered in system!", 'register')
                 is_valid = False
@@ -66,7 +66,7 @@ class User:
             is_valid_email = False
         if is_valid_email:
             query = "SELECT * FROM users WHERE email = %(email)s;"
-            result = connectToMySQL('recipe_schema').query_db(query, form_data)
+            result = connectToMySQL('recipes').query_db(query, form_data)
             if not bcrypt.check_password_hash(result[0]['password'], form_data.get('password')):
                 flash('Invalid Password entered', 'login')
                 is_valid = False
@@ -79,7 +79,7 @@ class User:
         INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) 
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());
         """
-        return connectToMySQL('recipe_schema').query_db(query, data)
+        return connectToMySQL('recipes').query_db(query, data)
     
     @classmethod
     def get_user_by_email(cls, data:dict):
@@ -88,7 +88,7 @@ class User:
         FROM users 
         WHERE email = %(email)s;
         """
-        result = connectToMySQL('recipe_schema').query_db(query, data)
+        result = connectToMySQL('recipes').query_db(query, data)
         if len(result) < 1: 
             return False
         return cls(result[0])
@@ -100,7 +100,7 @@ class User:
         FROM users 
         WHERE id = %(id)s;
         """
-        result = connectToMySQL('recipe_schema').query_db(query, data)
+        result = connectToMySQL('recipes').query_db(query, data)
         return cls(result[0])
 
     @classmethod
@@ -110,4 +110,4 @@ class User:
         FROM users
         WHERE email = %(email)s
         """
-        return connectToMySQL('recipe_schema').query_db(query, data)
+        return connectToMySQL('recipes').query_db(query, data)

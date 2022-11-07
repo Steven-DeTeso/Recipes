@@ -1,13 +1,12 @@
-import pymysql.cursors # type: ignore 
-# this class will give us an instance of a connection to our database
+import pymysql.cursors 
 
 # THIS FILE NEEDS TO BE IN HERE LIKE THIS TO CONNECT TO MY LOCAL DATABASE
 
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'localhost',  # type: ignore
+        connection = pymysql.connect(host = 'localhost',
                                     user = 'root', 
-                                    password = 'kvothe11!', #need to change to my pw for mysql 'kvothe11!'
+                                    password = 'kvothe11!',
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
