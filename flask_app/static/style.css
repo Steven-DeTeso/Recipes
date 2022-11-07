@@ -1,0 +1,68 @@
+/* all css */
+
+/* all css */
+
+* {
+    margin: 0px;
+    padding: 0px
+}
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container-fluid{
+    background-color: lightblue;
+    height: 1000px;
+}
+
+.register, .login{
+    margin-top: 30px;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    border: solid 2px black;
+    border-radius: 5%;
+}
+
+button{
+    margin-top: 15px;
+}
+
+h1{
+    color: #0d6efd;
+}
+
+h2{
+    font-size: calc(1.375rem + 1.5vw);
+    color: #198754;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+ul{
+    list-style: none;
+
+}
+
+li{
+    margin-bottom: 5px;
+    margin-left: -25px;
+    border-radius: 20%;
+    text-align: center;
+}
+
+.error{
+    font-size: larger;
+    font-weight: bold;
+    background-color: #f7d6d9;
+}
+
+span{
+    font-size: large;
+    font-weight: bold;
+    color: rgb(255, 0, 0)
+}
