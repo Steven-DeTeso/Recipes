@@ -21,15 +21,49 @@ class Recipe:
         return connectToMySQL('recipes').query_db(query, data)
 
     @classmethod
-    def get_all_recipes(cls, data):
+    def get_all_recipes(cls):
         query = """
         SELECT * 
-        FROM recipes;
+        FROM recipes
+        JOIN users
+        ON recipes.user_id = users.id;
         """
-        results = connectToMySQL('recipes').query_db(query, data)
+        results = connectToMySQL('recipes').query_db(query)
         recipes = []
         for recipe in results:
             one_recipe = cls(recipe)
-            one_recipe.user = recipe['name']
+            one_recipe.user = recipe['first_name']
             recipes.append(one_recipe)
         return recipes
+
+    @classmethod
+    def get_one(cls, data):
+        query = """
+        SELECT *
+        FROM recipes
+        JOIN users on recipes.user_id = users.id 
+        WHERE recipes.id = %(id)s;
+        """
+        result = connectToMySQL('recipes').query_db(query, data)
+        only_recipe = cls(result[0])
+        only_recipe.user = result[0]['first_name']
+        return only_recipe
+
+    @classmethod
+    def update_recipe(cls, data):
+        query = """
+        UPDATE recipes 
+        SET name = %(name)s, description = %(description)s,
+        instruction = %(instruction)s, minute = %(minute)s,
+        updated_at = NOW()
+        WHERE id = %(id)s;
+        """
+        return connectToMySQL('recipes').query_db(query, data)
+
+    @classmethod
+    def delete_recipe(cls, data):
+        query = """
+        DELETE FROM recipes
+        WHERE id = %(id)s;
+        """
+        return connectToMySQL('recipes').query_db(query, data)

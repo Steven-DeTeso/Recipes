@@ -9,29 +9,27 @@
 </head>
 <body>
     <div class="container-fluid justify-content-evenly">
-        <h1>Add a New Recipe!</h1>
+        <h1>Edit {{recipe.user}}'s {{recipe.name}} Recipe!</h1>
         <a href="/login/success">back to recipes</a>
         <a href="/log_out">logout</a>
         <div class="container d-flex row">
-            <form action="/recipe/create" method="POST">
+            <form action="/recipe/redo" method="POST">
                 <div class="row col-4">
                     <label for="name" name="name">Name</label>
-                    <input type="text" for="name" name="name">
+                    <input type="text" for="name" name="name" value="{{recipe.name}}">
                     <label for="description">Description</label>
-                    <textarea name="description" cols="30" rows="5"></textarea>
+                    <textarea name="description" cols="30" rows="5">{{recipe.description}}</textarea>
                     <label for="instruction">instructions</label>
-                    <textarea name="instruction" cols="30" rows="5"></textarea>
+                    <textarea name="instruction" cols="30" rows="5">{{recipe.instruction}}</textarea>
                 </div>
                 <div class=" mb-3 col-4">
-                    <p>Date Cooked/Made:</p>
-                    <input type="date" name="created_at">
                     <p>Under 30 mins?</p>
                     <label for="positive">Yes</label>
                     <input type="radio" name="minute" id="positive" value="1">
                     <label for="negatvie">No</label>
                     <input type="radio" name="minute" id="negatvie" value="0">
                     <input type="submit" value="Submit">
-                    <input type="hidden" name="user_id" value="{{ session['user_id']['id'] }}">
+                    <input type="hidden" name="id" value="{{recipe.id}}">
                 </div>
             </form>
         </div>

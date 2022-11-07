@@ -22,15 +22,24 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Under</th>
+                    <th>Under 30 mins?</th>
                     <th>Posted By</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                {% for recipe in recipes %}
                 <tr>
-                    
-                </tr>
+                    <td>{{recipe.name}}</td>
+                    {% if recipe.minute == 0 %}
+                    <td>No</td>
+                    {% else%}
+                    <td>Yes</td>
+                    {% endif %}
+                    <td>{{recipe.user}}</td>
+                    <td><a href="/recipe/view/{{recipe.id}}">view recipe</a> | <a href="/recipe/edit/{{recipe.id}}">Edit</a> | <a href="/recipe/delete/{{recipe.id}}">Delete</a></td>
+                    </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

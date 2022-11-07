@@ -35,9 +35,10 @@ def f_login_user():
 
 @app.route('/login/success')
 def r_success():
+    recipes = Recipe.get_all_recipes()
     if 'user_id' not in session:
         return redirect('/log_out')
-    return render_template('dashboard.html', user = session['user_id'])
+    return render_template('dashboard.html', user = session['user_id'], recipes = recipes)
 
 @app.route('/log_out')
 def rd_log_out():
