@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.user import User
 from flask import flash
 
 class Recipe:
@@ -32,7 +33,16 @@ class Recipe:
         recipes = []
         for recipe in results:
             one_recipe = cls(recipe)
-            one_recipe.user = recipe['first_name']
+            print(recipe)
+            data = {
+                'id':recipe['users.id'],
+                'first_name': recipe['first_name'],
+                'last_name': recipe['last_name'],
+                'email': recipe['email'],
+                'created_at': recipe['users.created_at'],
+                'updated_at': recipe['users.updated_at']
+            }
+            one_recipe.user = User(data)
             recipes.append(one_recipe)
         return recipes
 

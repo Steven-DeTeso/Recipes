@@ -36,8 +36,11 @@
                     {% else%}
                     <td>Yes</td>
                     {% endif %}
-                    <td>{{recipe.user}}</td>
-                    <td><a href="/recipe/view/{{recipe.id}}">view recipe</a> | <a href="/recipe/edit/{{recipe.id}}">Edit</a> | <a href="/recipe/delete/{{recipe.id}}">Delete</a></td>
+                    <td>{{recipe.user.first_name}}</td>
+                    <td><a href="/recipe/view/{{recipe.id}}">view recipe</a> | 
+                        {% if recipe.user.id == session['user_data']['id'] %}
+                        <a href="/recipe/edit/{{recipe.id}}">Edit</a> | <a href="/recipe/delete/{{recipe.id}}">Delete</a></td>
+                        {% endif %}
                     </tr>
             {% endfor %}
             </tbody>

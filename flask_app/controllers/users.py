@@ -18,7 +18,12 @@ def f_register_user():
         }
         User.save(data)
         user_in_db = User.get_one_for_login(data)
-        session['user_id'] = user_in_db[0] #steps in to just grab dict:object from list,hench [0]
+        session['user_data'] = {
+            'id': user_in_db[0]['id'], #steps in to just grab dict:object from list,hench [0]
+            'first_name': user_in_db[0]['first_name'],
+            'last_name': user_in_db[0]['last_name']
+        }
+
         return redirect('/login/success')
     return redirect('/')
 
@@ -30,15 +35,15 @@ def f_login_user():
         'email': request.form.get('email')
     }
     user_in_db = User.get_one_for_login(data)
-    session['user_id'] = user_in_db[0]
+    session['user_data'] = user_in_db[0]
     return redirect('/login/success')
 
 @app.route('/login/success')
 def r_success():
     recipes = Recipe.get_all_recipes()
-    if 'user_id' not in session:
+    if 'user_data' not in session:
         return redirect('/log_out')
-    return render_template('dashboard.html', user = session['user_id'], recipes = recipes)
+    return render_template('dashboard.html', user = session['user_data'], recipes = recipes)
 
 @app.route('/log_out')
 def rd_log_out():
